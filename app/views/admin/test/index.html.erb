@@ -1,0 +1,100 @@
+<div class="container">
+  <h2>Test Details </h2>
+  <table class="table table-hover table-striped">
+    <thead>
+    <tr>
+      <th>Id</th>
+      <th>Name</th>
+      <th>Description</th>
+      <th>Date</th>
+      <th>Questions</th>
+      <th>Marks</th>
+      <th>question paper</th>
+      <th>model answer </th>
+      <th>Action </th>
+    </tr>
+    </thead>
+    <tbody>
+    <% if @tests.present? %>  
+      <% @tests.each do |test| %>
+      <tr>
+        <td><%= test.id %></td>
+        <td><%= test.name %></td>
+        <td><%= test.description.first(40) %></td>
+        <td><%= test.test_date %></td>
+        <td><%= test.no_of_questions %></td>
+        <td><%= test.total_marks %></td>
+
+        <td>
+          <% if test.question_paper_link.present? %>
+            <%= test.question_paper_link %>
+            <%= link_to ' - X', "/admin/remove/question/#{test.id}" %>
+          <% else %>
+            -
+          <% end %>
+        </td>
+
+        <td>
+          <% if test.answer_paper_link.present? %>
+            <%= test.answer_paper_link %>
+            <%= link_to ' - X', "/admin/remove/answer/#{test.id}" %>
+          <% else %>
+            -
+          <% end %>
+        </td>
+        <td>
+          <button type="button" class="btn btn-info btn-sm btnModalOpen" data-test_id= "<%= test.id%>" data-toggle="modal" data-target="#myModal">upload</button>
+        </td>
+      </tr>
+      <% end %>
+    <% else %>
+      <tr>
+        <td colspan="9">No tests found.</td>
+      </tr>  
+    <% end %>
+    </tbody>
+  </table>
+</div>
+
+<!-- Modal -->
+<div id="myModal" class="modal fade" role="dialog">
+  <div class="modal-dialog">
+
+    <!-- Modal content-->
+    <div class="modal-content">
+
+      <div class="modal-body">
+        <%= form_tag(admin_upload_test_data_path, method: "post", multipart: true, role: 'form') do %>
+          <div class="modal-header">
+            <h4 class="modal-title">Upload files</h4>
+            <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+          </div>
+          <div class="modal-body">
+            <p> Question Paper </p>
+            <div id="messages"></div>
+            <input type="file" name="question_paper" id="file" accept="application/pdf" required>
+            <hr>
+            <p> Model Answer</p>
+            <div id="messages"></div>
+            <input type="file" name="model_answer" id="file" accept="application/pdf" required>
+
+            <input type="hidden" id="txtTestId" name="test_id" %>
+
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+            <button type="submit" class="btn btn-primary">Save</button>
+          </div>
+        <% end %>
+      </div>
+
+    </div>
+
+  </div>
+</div>
+
+<script>
+  $(".btnModalOpen").click(function(){
+    $("#txtTestId").val($(this).data('test_id'));
+  });
+</script>

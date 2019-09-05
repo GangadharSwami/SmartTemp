@@ -1,0 +1,53 @@
+
+<%= form_tag("/upload_attendance_data", method: "post", multipart: true, role: 'form') do %>
+    <fieldset>
+
+      <!-- Form Name -->
+      <legend>Attendance data upload </legend>
+
+      <!-- File Button -->
+      <div class="form-group">
+        <label class="col-md-4 control-label" for="att_zip">Attendance CSV ZIP </label>
+        <div class="col-md-4">
+          <input required id="att_zip" name="att_zip" class="input-file" type="file" accept=".zip">
+        </div>
+      </div>
+      <br> <br>
+      <!-- Button -->
+      <div class="form-group">
+        <label class="col-md-4 control-label" for="submit"></label>
+        <div class="col-md-4">
+          <button id="submit" name="submit" class="btn btn-primary">Submit</button>
+        </div>
+      </div>
+
+      <hr>
+    </fieldset>
+<% end %>
+
+
+<%= form_tag(admin_file_upload_db_zip_path, method: "post", multipart: true, role: 'form') do %>
+    <fieldset>
+      <!-- Form Name -->
+      <legend>OMR data upload </legend>
+
+      <!-- File Button -->
+      <div class="form-group">
+        <label class="col-md-4 control-label" for="att_zip">OMR CSV ZIP</label>
+        <div class="col-md-4">
+          <input required id="file" name="file" class="input-file" type="file" accept=".zip">
+        </div>
+      </div>
+      <br> <br>
+      <!-- Button -->
+      <div class="form-group">
+        <label class="col-md-4 control-label" for="submit"></label>
+        <div class="col-md-4">
+          <button id="submit" name="submit" class="btn btn-primary">Submit</button>
+        </div>
+      </div>
+      <br> <br>
+
+      <hr>
+    </fieldset>
+<% end %>
