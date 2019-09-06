@@ -26,30 +26,21 @@ class Test < ApplicationRecord
   has_many :batches, through: :batch_tests
 
   def get_toppers(limit, test_id)
-    sql = "SELECT test_id, student_id, student_marks, rank() OVER (PARTITION BY test_id ORDER BY student_marks DESC) AS rank FROM test_students WHERE test_id = #{self.id} LIMIT #{limit}"
-    # sql =  <<-SQL
-    #   SELECT test_id, student_id, student_marks, rank() OVER (PARTITION BY test_id ORDER BY student_marks DESC) AS rank
-    #   FROM test_students
-    #   WHERE test_id = test_id LIMIT lmt  
-    # SQL
-    rank_details = ActiveRecord::Base.connection.execute(sql)
-
+    rank_details = TestStudent.where(test_id: test_id).select('test_id, student_id, student_marks, rank() OVER (PARTITION BY test_id ORDER BY student_marks DESC) AS rank').limit(limit)
     topper_ids = rank_details.collect { |rank| rank["student_id"] }
     topper_students = Student.where(id: topper_ids).index_by(&:id)
 
-    toppers_list = []
-    rank_details.each do |rank_data|
+    toppers_list = rank_details.map{ |rank_data|
       student = topper_students[rank_data['student_id'].to_i]
-      next if student.nil?
-      toppers_list << {
+      {
         name: (student.name.humanize rescue ''),
         marks_obtained: rank_data['student_marks'],
         total_marks: self.total_marks,
         batch: student.batches.pluck(:name).join(', '),
         rank: rank_data['rank'].to_i,
         image_url: ""
-      }
-    end
+      } unless student.nil?
+    } 
     return toppers_list
   end
   
