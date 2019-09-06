@@ -13,6 +13,7 @@ class Api::V1::ResultController < Api::ApiController
         test_name: test.name,
         description: test.description,
         test_date: test.test_date,
+        test_time: '10:00 AM',
         toppers: test.get_toppers(50, test_id)
       }
     } 
