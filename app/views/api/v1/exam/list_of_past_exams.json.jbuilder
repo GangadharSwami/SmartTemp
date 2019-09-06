@@ -1,1 +1,2 @@
-json.past_exams @past_exams
+ json.past_exams @past_exams
+
