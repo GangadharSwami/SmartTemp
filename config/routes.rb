@@ -41,6 +41,7 @@ Rails.application.routes.draw do
         get 'past_exams' => 'exam#list_of_past_exams'
         get 'upcoming_exams' => 'exam#list_of_upcoming_exams'
         get 'list_of_test' => 'result#list_of_test'
+        get 'list_of_events' => 'event#list_of_events'
       end
     end
     
