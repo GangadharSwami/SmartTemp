@@ -23,6 +23,8 @@ class Student < ApplicationRecord
   has_many :batches, through: :batch_students
   has_many :test_students
   has_many :tests, through: :test_students
+  has_many :student_notifications
+  has_many :notifications, through: :student_notifications
 
   before_create :set_api_key
 
