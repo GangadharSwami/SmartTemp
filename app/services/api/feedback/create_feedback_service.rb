@@ -15,7 +15,7 @@ module Api
       def call
         validate_request
 
-        Feedback.create(student_id: @student_id, name: @name, mobile_number: @mobile_number, feedback: @feedback)
+        ::Feedback.create(student_id: @student_id, name: @name, mobile_number: @mobile_number, feedback: @feedback)
         
         return {status: true, message: "Feedback added successfully."}
       rescue CreateFeedbackError, ActiveRecord::RecordInvalid => ex
@@ -25,10 +25,10 @@ module Api
       private
 
       def validate_request
-        raise CreateFeedbackError, 'Student not found' if student_id.nil?
-        raise CreateFeedbackError, 'Mobile number not found' if mobile_number.nil?
-        raise CreateFeedbackError, 'Name not found' if name.nil?
-        raise CreateFeedbackError, 'Feedback not found' if feedback.nil?
+        raise CreateFeedbackError, 'Student not found' unless @student_id.present?
+        raise CreateFeedbackError, 'Mobile number not found' unless @mobile_number.present?
+        raise CreateFeedbackError, 'Name not found' unless @name.present?
+        raise CreateFeedbackError, 'Feedback not found' unless @feedback.present?
       end
     end
   end
