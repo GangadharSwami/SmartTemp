@@ -44,6 +44,7 @@ Rails.application.routes.draw do
         get 'list_of_events' => 'event#list_of_events'
         post 'create_feedback' => 'feedback#create_feedback'
         post 'add_notification_token' => 'notification#add_notification_token'
+        post 'send_push_notifications' => 'notification#send_push_notifications'
       end
     end
     

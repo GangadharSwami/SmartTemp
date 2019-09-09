@@ -26,6 +26,8 @@ class Student < ApplicationRecord
 
   before_create :set_api_key
 
+  scope :with_notification_token, -> { where.not(notification_token: nil) }
+
   enum gender: {male: 0, female: 1}
 
   def set_api_key

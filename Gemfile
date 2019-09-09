@@ -42,6 +42,8 @@ gem 'jbuilder', '~> 2.5'
 gem 'rubyzip', '>= 1.0.0' # will load new rubyzip version
 gem 'zip-zip' # will load compatibility for old rubyzip API.
 
+#sending push notifications
+gem 'exponent-server-sdk'
 
 # Use for multitenant
 #gem 'apartment'

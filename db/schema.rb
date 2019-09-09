@@ -91,12 +91,12 @@ ActiveRecord::Schema.define(version: 2019_09_09_092517) do
   end
 
   create_table "student_notifications", force: :cascade do |t|
-    t.bigint "students_id"
-    t.bigint "notifications_id"
+    t.bigint "student_id"
+    t.bigint "notification_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["notifications_id"], name: "index_student_notifications_on_notifications_id"
-    t.index ["students_id"], name: "index_student_notifications_on_students_id"
+    t.index ["notification_id"], name: "index_student_notifications_on_notification_id"
+    t.index ["student_id"], name: "index_student_notifications_on_student_id"
   end
 
   create_table "students", force: :cascade do |t|
