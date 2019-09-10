@@ -43,7 +43,7 @@ class Api::V1::AttendanceController < Api::ApiController
       },
       {
         date: Date.today - 8.day,
-        present: false,
+        present: true,
         exam: false,
         holiday: true,
         absent_reason: '',
