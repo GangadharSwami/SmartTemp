@@ -38,10 +38,10 @@ module Admin
       end
 
       def check_directory
-        unless File.directory?("/var/app/#{ subdomain }")
-          FileUtils.mkdir_p("/var/app/#{ subdomain }")
+        unless File.directory?("/var/app")
+          FileUtils.mkdir_p("/var/app")
         end
-        "/var/app/#{ subdomain }"
+        "/var/app"
       end
 
       def upload_question_paper(question_paper)
