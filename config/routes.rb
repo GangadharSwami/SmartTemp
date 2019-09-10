@@ -47,6 +47,7 @@ Rails.application.routes.draw do
         post 'send_push_notifications' => 'notification#send_push_notifications'
         get 'list_student_notifications' => 'notification#list_student_notifications'
         get 'download_questions' => 'result#download_questions'
+        get 'download_answers' => 'result#download_answers'
       end
     end
     

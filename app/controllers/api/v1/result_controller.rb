@@ -42,7 +42,7 @@ class Api::V1::ResultController < Api::ApiController
     file_name = "#{test_id}_model_answer.pdf"
 
     # CLIENT_NAME_HERE
-    file_path = "/var/app/#{@current_subdoamin}/#{file_name}"
+    file_path = "#{Rails.root}/papers/#{file_name}"
     pdf = open(file_path)
     send_file file_path, :type => "application/pdf"
   end
