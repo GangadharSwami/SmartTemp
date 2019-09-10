@@ -5,7 +5,7 @@ class Admin::TestController < Admin::BaseController
   end
 
   def upload_test_data
-    response = Admin::Test::UploadTestDataService.new(params, current_client.subdomain).call
+    response = Admin::Test::UploadTestDataService.new(params, 'rccnanded').call
 
     if(response[:status])
       flash[:success] = response[:message]
