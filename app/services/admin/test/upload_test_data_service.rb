@@ -38,10 +38,11 @@ module Admin
       end
 
       def check_directory
-        unless File.directory?("/var/app")
-          FileUtils.mkdir_p("/var/app")
-        end
-        "/var/app"
+        # unless File.directory?("/var/app")
+        #   FileUtils.mkdir_p("/var/app")
+        # end
+        # "/var/app"
+        "#{Rails.root}/papers"
       end
 
       def upload_question_paper(question_paper)
