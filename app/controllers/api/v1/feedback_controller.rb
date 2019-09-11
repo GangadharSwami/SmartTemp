@@ -8,12 +8,12 @@ class Api::V1::FeedbackController < Api::ApiController
   def get_gallery
     @images = []
     (1..17).each do |index|
-      @images << { image: "https://#{request.host}#{ActionController::Base.helpers.asset_path("#{index}.jpg")}" }
+      @images << { url: "https://#{request.host}#{ActionController::Base.helpers.asset_path("#{index}.jpg")}" }
     end
 
     (1..15).each do |i|
       index = "0#{i}"
-      @images << { image: "https://#{request.host}#{ActionController::Base.helpers.asset_path("#{index}.jpg")}" }
+      @images << { url: "https://#{request.host}#{ActionController::Base.helpers.asset_path("#{index}.jpg")}" }
     end
     
   end
