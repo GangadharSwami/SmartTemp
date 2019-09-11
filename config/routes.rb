@@ -48,6 +48,7 @@ Rails.application.routes.draw do
         get 'list_student_notifications' => 'notification#list_student_notifications'
         get 'download_questions' => 'result#download_questions'
         get 'download_answers' => 'result#download_answers'
+        get 'get_gallery' => 'feedback#get_gallery'
       end
     end
     
