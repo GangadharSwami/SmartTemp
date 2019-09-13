@@ -10,7 +10,9 @@ class Api::V1::ExamController < Api::ApiController
   end
 
   def list_of_upcoming_exams
-    @upcoming_exams = Test.where("tests.test_date > ?", Date.today).select("tests.*, to_char(test_date, 'dd/mm/yyyy') as formatted_test_date")
+    @student_id = params[:student_id].to_i
+    student_batch = BatchStudent.find_by(student_id: @student_id)
+    @upcoming_exams = Test.joins(:batch_tests).where("tests.test_date > ? and batch_tests.batch_id = ?", Date.today, student_batch.batch_id).select("tests.*, to_char(test_date, 'dd/mm/yyyy') as formatted_test_date")
   end
 
   private

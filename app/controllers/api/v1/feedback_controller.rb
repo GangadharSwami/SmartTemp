@@ -15,6 +15,5 @@ class Api::V1::FeedbackController < Api::ApiController
       index = "0#{i}"
       @images << { url: "https://#{request.host}#{ActionController::Base.helpers.asset_path("#{index}.jpg")}" }
     end
-    
   end
 end
