@@ -6,13 +6,54 @@ class Api::V1::ExamController < Api::ApiController
       select("tests.*, test_students.*, to_char(tests.test_date, 'dd/mm/yyyy') as formatted_test_date")
     @past_exams.each do |exam|
       exam.rank = get_rank(exam.test_id)
-    end  
+    end 
+    @past_exams = @past_exams.map{ |exam|
+      {
+        name: exam.name,
+        description: exam.description,
+        test_date: exam.formatted_test_date,
+        no_of_questions: exam.no_of_questions,
+        total_marks: exam.total_marks,
+        passing_marks: exam.passing_marks,
+        answer_key: exam.answer_key,
+        is_theory: exam.is_theory,
+        is_combined: exam.is_combined,
+        question_paper_link: exam.question_paper_link,
+        answer_paper_link: exam.answer_paper_link,
+        created_at: exam.created_at,
+        test_id: exam.test_id,
+        student_marks: exam.student_marks,
+        student_answer_key: exam.student_answer_key,
+        rank: exam.rank,
+        test_duration: '45 min',
+        test_time: '10.00 AM',
+        is_student_present: true
+      }
+    }  
   end
 
   def list_of_upcoming_exams
     @student_id = params[:student_id].to_i
     student_batch = BatchStudent.find_by(student_id: @student_id)
     @upcoming_exams = Test.joins(:batch_tests).where("tests.test_date > ? and batch_tests.batch_id = ?", Date.today, student_batch.batch_id).select("tests.*, to_char(test_date, 'dd/mm/yyyy') as formatted_test_date")
+    @upcoming_exams = @upcoming_exams.map{ |exam|
+      {
+        name: exam.name,
+        description: exam.description,
+        test_date: exam.formatted_test_date,
+        no_of_questions: exam.no_of_questions,
+        total_marks: exam.total_marks,
+        passing_marks: exam.passing_marks,
+        answer_key: exam.answer_key,
+        is_theory: exam.is_theory,
+        is_combined: exam.is_combined,
+        question_paper_link: exam.question_paper_link,
+        answer_paper_link: exam.answer_paper_link,
+        created_at: exam.created_at,
+        test_duration: '45 min',
+        test_time: '10.00 AM'
+      }
+    }
   end
 
   private
