@@ -9,6 +9,7 @@ class Api::V1::ExamController < Api::ApiController
     end 
     @past_exams = @past_exams.map{ |exam|
       {
+        id: exam.id,
         name: exam.name,
         description: exam.description,
         test_date: exam.formatted_test_date,
@@ -38,6 +39,7 @@ class Api::V1::ExamController < Api::ApiController
     @upcoming_exams = Test.joins(:batch_tests).where("tests.test_date > ? and batch_tests.batch_id = ?", Date.today, student_batch.batch_id).select("tests.*, to_char(test_date, 'dd/mm/yyyy') as formatted_test_date")
     @upcoming_exams = @upcoming_exams.map{ |exam|
       {
+        id: exam.id,
         name: exam.name,
         description: exam.description,
         test_date: exam.formatted_test_date,
