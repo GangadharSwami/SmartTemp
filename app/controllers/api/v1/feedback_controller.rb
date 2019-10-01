@@ -13,7 +13,7 @@ class Api::V1::FeedbackController < Api::ApiController
 
     (1..15).each do |i|
       index = "0#{i}"
-      @images << { url: "https://#{request.host}#{ActionController::Base.helpers.asset_path("#{index}.jpg")}" }
+    @images << {source: { uri: "https://#{request.host}#{ActionController::Base.helpers.asset_path("#{index}.jpg")}" }}
     end
   end
 end
