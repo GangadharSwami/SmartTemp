@@ -11,6 +11,6 @@ class Api::V1::NotificationController < Api::ApiController
   end
 
    def list_student_notifications
-    @notifications = Student.find_by(id: params[:student_id]).notifications
+    @notifications = Student.find_by(id: params[:student_id]).notifications.order(created_at: :desc)
   end
 end
