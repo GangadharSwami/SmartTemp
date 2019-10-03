@@ -57,6 +57,7 @@ class Api::V1::AttendanceController < Api::ApiController
     @attendance_logs_by_year = @attendance_logs.group_by{|log| log.log_date.year}
     @attendance_logs_by_year_month = []
     @attendance_logs_by_year.each do |key, arr|
+      year = key
       year_data = {}
       month_data = []
       month_wise =  arr.group_by{|log| log.log_date.strftime("%b")} unless arr.nil?
@@ -66,6 +67,7 @@ class Api::V1::AttendanceController < Api::ApiController
         present_days = m_data.uniq {|obj| obj.log_date}.count
 
         d[key] = {
+          first_date: "#{year}-#{Date::ABBR_MONTHNAMES.index(key)}-01",
           total_days: total_days,
           present_days: present_days,
           all_dates: m_data 
