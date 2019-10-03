@@ -60,14 +60,13 @@ class Api::V1::AttendanceController < Api::ApiController
       year = key
       year_data = {}
       month_data = []
-      month_wise =  arr.group_by{|log| log.log_date.strftime("%b")} unless arr.nil?
+      month_wise =  arr.group_by{|log| log.log_date.strftime("%m")} unless arr.nil?
       month_wise.each do |key, m_data|
         d = {}
         total_days = Time.days_in_month(m_data.first.log_date.month, m_data.first.log_date.year)
         present_days = m_data.uniq {|obj| obj.log_date}.count
-
-        d[key] = {
-          first_date: "#{year}-#{Date::ABBR_MONTHNAMES.index(key)}-01",
+        d[Date::ABBR_MONTHNAMES[key.to_i]] = {
+          first_date: "#{year}-#{key}-01",
           total_days: total_days,
           present_days: present_days,
           all_dates: m_data 
