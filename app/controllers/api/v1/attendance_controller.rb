@@ -53,6 +53,7 @@ class Api::V1::AttendanceController < Api::ApiController
   #   ]
   # end
   def attendance
+    @grand_total_days, @grand_present_days = 0, 0
     @attendance_logs = AttendanceLog.where(roll_number: 61630).order(log_date: :desc)
     @attendance_logs_by_year = @attendance_logs.group_by{|log| log.log_date.year}
     @attendance_logs_by_year_month = []
@@ -69,15 +70,27 @@ class Api::V1::AttendanceController < Api::ApiController
           first_date: "#{year}-#{key}-01",
           total_days: total_days,
           present_days: present_days,
+          absent_days: total_days - present_days,
+          off_days: 0,
           all_dates: m_data 
         }
         month_data.push d
+        @grand_total_days += total_days
+        @grand_present_days += present_days 
       end
       year_data[key] = month_data
       @attendance_logs_by_year_month.push year_data
     end
+   
+    @attendance_head_data = {
+      total_days: @grand_total_days,
+      present_days: @grand_present_days,
+      absent_days: @grand_total_days - @grand_present_days,
+      attendance_perc: ((@grand_present_days.to_f / @grand_total_days.to_f) * 100).round(2)
+    }
+
     
-    render json: { status: 'success', attendance: @attendance_logs_by_year_month }
+    render json: { status: 'success', attendance: @attendance_logs_by_year_month, attendance_head_data: @attendance_head_data }
   end
 
 end
