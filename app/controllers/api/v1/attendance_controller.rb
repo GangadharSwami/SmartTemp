@@ -53,7 +53,7 @@ class Api::V1::AttendanceController < Api::ApiController
   #   ]
   # end
   def attendance
-    @attendance_logs = AttendanceLog.where(roll_number: params[:roll_number]).order(log_date: :desc)
+    @attendance_logs = AttendanceLog.where(roll_number: 61630).order(log_date: :desc)
     @attendance_logs_by_year = @attendance_logs.group_by{|log| log.log_date.year}
     @attendance_logs_by_year_month = []
     @attendance_logs_by_year.each do |key, arr|
