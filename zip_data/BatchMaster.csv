@@ -1,0 +1,7 @@
+BatchID,BatchName,FromTime,ToTime,SpanInterval,IsDelete
+1,10th-A,5,2130,60,False
+2,10th-B,5,2130,60,False
+3,10th-C,5,2130,60,False
+4,10th_Grammar,5,2130,60,False
+5,Adv Grammar B,5,2130,60,False
+6,Basic Grammar,5,2130,60,False

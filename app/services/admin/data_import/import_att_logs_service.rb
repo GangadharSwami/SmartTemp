@@ -46,7 +46,7 @@ module Admin
         end
 
         # remove duplicate entries
-        #AttendanceLog.dedupe
+        AttendanceLog.dedupe
         
         return {status: true, message: 'Attendance Logs imported successfully'}
       rescue ImportAttLogsVError, ActiveRecord::RecordInvalid => ex

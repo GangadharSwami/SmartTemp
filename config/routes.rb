@@ -63,6 +63,7 @@ Rails.application.routes.draw do
       post 'upload_test_data' => 'test#upload_test_data'
       get 'remove/:paper/:test_id' => 'test#delete_papers'
       post 'file_upload_db_zip' => 'data_import#file_upload_db_zip'
+      post 'attendance_upload_db_zip' => 'data_import#upload_attendance_data'
     end
     root to: 'admin/home#index'
   
