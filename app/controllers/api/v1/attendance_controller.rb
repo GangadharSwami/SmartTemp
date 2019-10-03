@@ -66,13 +66,18 @@ class Api::V1::AttendanceController < Api::ApiController
         d = {}
         total_days = Time.days_in_month(m_data.first.log_date.month, m_data.first.log_date.year)
         present_days = m_data.uniq {|obj| obj.log_date}.count
+        first_day = "#{year}-#{key}-01"
+        last_day = Date.new(year,key.to_i,-1)
+        all_dates_in_month_arr = (first_day.to_date..last_day).map{ |date| date.strftime("%Y-%m-%d") }
+
         d[Date::ABBR_MONTHNAMES[key.to_i]] = {
           first_date: "#{year}-#{key}-01",
           total_days: total_days,
           present_days: present_days,
           absent_days: total_days - present_days,
           off_days: 0,
-          all_dates: m_data 
+          present_dates: m_data,
+          all_dates_arr: all_dates_in_month_arr 
         }
         month_data.push d
         @grand_total_days += total_days
