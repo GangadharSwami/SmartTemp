@@ -103,7 +103,7 @@ class Api::V1::ExamController < Api::ApiController
         question_no: q_count,
         modal_ans: modal_ans,
         student_ans: student_ans,
-        marks: student_ans == "@" ? "-1" : (student_ans == modal_ans ? "+4" : "0" )
+        marks: student_ans == "@" ? "0" : (student_ans == modal_ans ? "+4" : "-1" )
       }
     end
     final_data
