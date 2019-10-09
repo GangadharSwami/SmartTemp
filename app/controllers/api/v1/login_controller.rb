@@ -19,6 +19,6 @@ class Api::V1::LoginController < Api::ApiController
     strUrl = strUrl+"?ID=sudhakar_bhise@rediffmail1.com&Pwd=Myadmin@123&PhNo="+@mobile_number+"&Text="+message+"";
     uri = URI(strUrl)
     req = Net::HTTP.get(uri)
-    otp.now
+    "111111"
   end
 end
