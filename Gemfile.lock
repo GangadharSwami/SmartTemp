@@ -184,6 +184,8 @@ GEM
     responders (3.0.0)
       actionpack (>= 5.0)
       railties (>= 5.0)
+    rotp (5.1.0)
+      addressable (~> 2.5)
     rspec-core (3.8.2)
       rspec-support (~> 3.8.0)
     rspec-expectations (3.8.4)
@@ -279,6 +281,7 @@ DEPENDENCIES
   pry-nav
   puma (~> 3.11)
   rails (~> 5.2.3)
+  rotp
   rspec-rails (~> 3.8)
   rubyzip (>= 1.0.0)
   sass-rails (~> 5.0)
