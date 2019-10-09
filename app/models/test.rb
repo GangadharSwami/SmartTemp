@@ -25,6 +25,9 @@ class Test < ApplicationRecord
   has_many :batch_tests
   has_many :batches, through: :batch_tests
 
+  mount_uploader :question_paper_link, PdfUploader
+  mount_uploader :answer_paper_link, PdfUploader
+
   def get_toppers(limit, test_id)
     rank_details = TestStudent.where(test_id: test_id).select('test_id, student_id, student_marks, rank() OVER (PARTITION BY test_id ORDER BY student_marks DESC) AS rank').limit(limit)
     topper_ids = rank_details.collect { |rank| rank["student_id"] }

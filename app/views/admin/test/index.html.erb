@@ -24,10 +24,9 @@
         <td><%= test.test_date %></td>
         <td><%= test.no_of_questions %></td>
         <td><%= test.total_marks %></td>
-
         <td>
           <% if test.question_paper_link.present? %>
-            <%= test.question_paper_link %>
+            <%= test.question_paper_link.file.filename %>
             <%= link_to ' - X', "/admin/remove/question/#{test.id}" %>
           <% else %>
             -
@@ -36,7 +35,7 @@
 
         <td>
           <% if test.answer_paper_link.present? %>
-            <%= test.answer_paper_link %>
+            <%= test.answer_paper_link.file.filename %>
             <%= link_to ' - X', "/admin/remove/answer/#{test.id}" %>
           <% else %>
             -

@@ -29,20 +29,14 @@ class Api::V1::ResultController < Api::ApiController
 
   def download_questions
     test_id = params[:test_id]
-    file_name = "#{test_id}_question_paper.pdf"
-
-    # CLIENT_NAME_HERE
-    file_path = "#{Rails.root}/papers/#{file_name}"
+    file_path = ::Test.find(test_id).question_paper_link.current_path
     pdf = open(file_path)
     send_file file_path, :type => "application/pdf"
   end
 
   def download_answers
     test_id = params[:test_id]
-    file_name = "#{test_id}_model_answer.pdf"
-
-    # CLIENT_NAME_HERE
-    file_path = "#{Rails.root}/papers/#{file_name}"
+    file_path = ::Test.find(test_id).answer_paper_link.current_path
     pdf = open(file_path)
     send_file file_path, :type => "application/pdf"
   end
