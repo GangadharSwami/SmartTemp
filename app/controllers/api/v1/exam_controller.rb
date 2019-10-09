@@ -35,7 +35,7 @@ class Api::V1::ExamController < Api::ApiController
 
   def list_of_past_exams
     @student_id = params[:student_id].to_i
-    @past_exams = Test.joins(:test_students).where("test_students.student_id = ? and tests.test_date < ?", @student_id, Date.today).order(test_date: :desc).select("tests.*, test_students.*, to_char(tests.test_date, 'dd Mon yyyy') as formatted_test_date")
+    @past_exams = Test.joins(:test_students).where("test_students.student_id = ? and tests.test_date < ?", @student_id, Date.today).order(test_date: :desc).page(params[:page] || 1)&.per(1).select("tests.*, test_students.*, to_char(tests.test_date, 'dd Mon yyyy') as formatted_test_date")
     @past_exams.each do |exam|
       exam.rank = get_rank(exam.test_id)
     end
