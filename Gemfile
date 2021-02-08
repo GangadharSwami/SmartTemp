@@ -51,7 +51,7 @@ gem 'exponent-server-sdk'
 gem 'devise'
 
 gem 'devise-bootstrap-views'
-gem 'carrierwave', '~> 2.0'
+gem 'carrierwave', '~> 2.1'
 gem 'rotp'
 
 #paginatiion 
